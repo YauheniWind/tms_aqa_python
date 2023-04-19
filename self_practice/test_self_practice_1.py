@@ -5,11 +5,15 @@ from selenium.webdriver.common.by import By
 
 
 def test_show_product():
-    driver = webdriver.Chrome("/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver")
+    driver = webdriver.Chrome(
+        "/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver"
+    )
     driver.fullscreen_window()
     driver.get("https://www.istores.sk")
     time.sleep(1)
-    show_product = driver.find_element(By.XPATH, '//*[@id="wnCarousel24"]/div[2]/div[2]/div/div[1]')
+    show_product = driver.find_element(
+        By.XPATH, '//*[@id="wnCarousel24"]/div[2]/div[2]/div/div[1]'
+    )
     show_product.click()
     h1_xpath = '//*[@id="contentcont"]/div[2]/div/div[1]/div[1]/div[2]/h1'
 
@@ -21,7 +25,9 @@ def test_show_product():
 
 
 def test_hamburger_menu():
-    driver = webdriver.Chrome("/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver")
+    driver = webdriver.Chrome(
+        "/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver"
+    )
     driver.get("https://www.istores.sk")
     time.sleep(2)
 
@@ -42,12 +48,14 @@ def test_hamburger_menu():
     name = '//*[@id="contentcont"]/div[2]/div/div[1]/div[1]/div[2]/h1'
     name_locator = driver.find_element(By.XPATH, name).text
 
-    assert name_locator == 'iPhone 14 Pro Max 128 GB kozmicky čierny'
+    assert name_locator == "iPhone 14 Pro Max 128 GB kozmicky čierny"
     driver.quit()
 
 
 def test_search():
-    driver = webdriver.Chrome("/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver")
+    driver = webdriver.Chrome(
+        "/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver"
+    )
     driver.get("https://www.istores.sk")
     time.sleep(2)
 
@@ -61,12 +69,14 @@ def test_search():
     searched_element = '//*[@id="contentcont"]/div[3]/div[1]/p'
     searched_locator = driver.find_element(By.XPATH, searched_element).text
 
-    assert searched_locator == 'Hľadanie: iphone'
+    assert searched_locator == "Hľadanie: iphone"
     driver.quit()
 
 
 def test_log_in():
-    driver = webdriver.Chrome("/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver")
+    driver = webdriver.Chrome(
+        "/Users/evgenijgravdin/Desktop/tms_aqa_python/chromedriver"
+    )
     driver.get("https://www.saucedemo.com/")
     time.sleep(1)
 
