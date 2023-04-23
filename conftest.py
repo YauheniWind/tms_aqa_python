@@ -29,3 +29,15 @@ def browser_firefox():
 
     driver.close()
     driver.quit()
+
+
+@pytest.fixture()
+def credentials():
+    return {"login": "standard_user", "password": "secret_sauce"}
+
+
+@pytest.fixture()
+def locators():
+    return {"login_loc": '//*[@id="user-name"]',
+            "password_loc": '//*[@id="password"]',
+            "submit_loc": '//*[@id="login-button"]'}
