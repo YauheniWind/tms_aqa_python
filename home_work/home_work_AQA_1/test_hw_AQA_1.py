@@ -17,9 +17,7 @@ def test_log_in(browser, credentials, locators):
 
     current_url = browser.current_url  # получем актуальный url
 
-    assert (
-        current_url == "https://www.saucedemo.com/inventory.html"
-    )  # Проверяем что  переход совершился
+    assert current_url == "https://www.saucedemo.com/inventory.html"  # Проверяем что  переход совершился
 
 
 # Добавление элемента в корзину
@@ -49,8 +47,7 @@ def test_add_in_basket(browser, credentials, locators):
     name_of_product_in_basket_loc = browser.find_element(
         By.XPATH, '//*[@id="item_4_title_link"]/div'
     ).text
-
-    assert name_of_product_loc == name_of_product_in_basket_loc
+    assert name_of_product_loc == name_of_product_in_basket_loc  # Проверяем что в корзине тот элемент
 
 
 # Отображение формы регистрации после нажатия submit
@@ -74,7 +71,8 @@ def test_registration_form(browser):
 
     if modal_win_loc.is_displayed():
         name_in_modal_loc = browser.find_element(By.XPATH, '//*[@id="name"]')
-        assert "Ev Gev" == name_in_modal_loc.text.split(":")[1]
+        assert "Ev Gev" == name_in_modal_loc.text.split(":")[1]  # Проверяем правильность имени
+
 
 # Поиск книги
 def test_searching_book(browser):
@@ -87,7 +85,8 @@ def test_searching_book(browser):
         By.XPATH, '//*[@id="see-book-Git Pocket Guide"]/a'
     )
 
-    assert name_of_book_loc.text == "Git Pocket Guide"
+    assert name_of_book_loc.text == "Git Pocket Guide"  # Проверка та ли книга нашлась
+
 
 # Перемещение объекта
 def test_drag_and_drop(browser):
@@ -104,4 +103,4 @@ def test_drag_and_drop(browser):
 
     assert expected_conditions.text_to_be_present_in_element(
         (By.XPATH, drop_el_loc), "Dropped!"
-    )
+    )  # Проверка переместился ли элемент
