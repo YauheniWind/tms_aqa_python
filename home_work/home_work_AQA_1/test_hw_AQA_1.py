@@ -1,12 +1,10 @@
-import time
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions
 
-from helper import Helper
+from Helper import Helper
 from ElementsObject import ElementsObject
-class Tests_Page:
+class TestsPage:
     def test_drag_and_drop(self, browser):
         helper = Helper(browser)
         helper.driver.get("https://demoqa.com/droppable")
@@ -45,7 +43,7 @@ def test_log_in(browser, credentials):
 
 # Добавление элемента в корзину
 def test_add_in_basket(browser, credentials):
-    helper= Helper(browser)
+    helper = Helper(browser)
     helper.driver.get("https://www.saucedemo.com")
 
     login_loc = helper.get_locator_by_xpath(ElementsObject.login_loc)
