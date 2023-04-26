@@ -21,3 +21,20 @@ class ElementsObject:
 
     search_box = '//*[@id="searchBox"]'
     name_of_book = '//*[@id="see-book-Git Pocket Guide"]/a'
+
+    radio_button = '//label[@for="yesRadio"]'
+    span_text = '.mt-3 > .text-success'
+
+    menu = '.rct-text > button'
+    home_checkbox = '//*[@id="tree-node"]/ol/li/span//span[@class="rct-checkbox"]'
+    desktop_checkbox = '#tree-node > ol ol > li:nth-child(1) span.rct-checkbox'
+    result_text = '//*[@id="result"]'
+
+    scroll = '//*[@id="app"]//div[2]/div[1]//div[5]'
+    scroll_footer = '//*[@id="app"]/footer'
+
+    select_one = '//*[@id="selectOne"]/div/div[2]//div'
+    dr_select = '//*[@id="react-select-3-option-0-0"]'
+    select_one_text = '.css-1hwfws3> .css-1uccc91-singleValue'
+
+    input_full_name = '#userName'
