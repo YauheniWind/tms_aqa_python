@@ -1,4 +1,8 @@
+import time
+
 from selenium.webdriver.common.by import By
+
+from Helper import Helper
 
 
 def test_basket(browser):
@@ -64,3 +68,45 @@ def test_checks_elements(browser):
     print(selectors)
     browser.execute_script("arguments[0].scrollIntoView();", selector)
     assert selector.is_displayed()
+
+def test_alert(browser):
+    browser.get('https://learn.javascript.ru/task/simple-page')
+
+    current_w = browser.current_window_handle
+
+    a = browser.find_element(By.XPATH, '/html/body/div[1]/div[2]/div/main/div[2]/div[2]/div[2]/div[1]/p[2]/a')
+    a.click()
+    promtp = browser.switch_to.alert
+    promtp.send_keys("ev")
+    promtp.accept()
+    assert promtp.text == 'ev'
+
+    browser.switch_to.window(current_w)
+
+def test_window(browser):
+    browser.get('http://the-internet.herokuapp.com/windows')
+    or_w = browser.current_window_handle
+    click_here = browser.find_element(By.XPATH, '//*[@id="content"]/div/a')
+    click_here.click()
+
+    new_w = [window for window in browser.window_handles if window != or_w][0]
+    browser.switch_to.window(new_w)
+
+    nw = browser.find_element(By.XPATH, '/html/body/div/h3')
+    assert nw.text == 'New Window'
+
+    browser.close()
+    browser.switch_to.window(or_w)
+    assert click_here.text == 'Click Here'
+
+
+class TestBep:
+    def test_iframe_(self, browser):
+        helper = Helper(browser)
+        helper.driver.get('http://the-internet.herokuapp.com/iframe')
+        helper.driver.fullscreen_window()
+
+        helper.switch_to_iframe('//*[@id="mce_0_ifr"]')
+        p_p = browser.find_element(By.XPATH, '//*[@id="tinymce"]/p')
+
+        assert p_p.text == 'Your content goes here.'

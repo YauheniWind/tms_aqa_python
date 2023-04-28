@@ -8,3 +8,4 @@ ujson==5.7.0
 pytest-asyncio==0.21.0
 flake8==6.0.0
 selenium
+pytest-xdist
