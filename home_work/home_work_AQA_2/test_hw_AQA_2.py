@@ -1,4 +1,3 @@
-from selenium.webdriver.common.action_chains import ActionChains
 from Helper import Helper
 from ElementsObject import ElementsObject
 
@@ -18,35 +17,22 @@ class TestElements:
         helper = Helper(browser)
         helper.driver.get("https://demoqa.com/radio-button")
 
-        radio_button_locator = helper.get_locator_by_xpath(ElementsObject.radio_button)
-        radio_button_text = radio_button_locator.text
+        helper.click_radio_button(ElementsObject.radio_button)
+        radio_button_text = helper.get_text(ElementsObject.radio_button)
 
-        radio_button_locator.click()
-
-        span_text_locator_text = helper.get_locator_by_css(
-            ElementsObject.span_text
-        ).text
-        browser.save_screenshot(f"test_1.png")
-        assert radio_button_text == span_text_locator_text
+        span_text = helper.get_text(ElementsObject.span_text)
+        browser.save_screenshot("test_1.png")
+        assert radio_button_text == span_text
 
     def test_checkbox(self, browser):
         helper = Helper(browser)
         helper.driver.get("https://demoqa.com/checkbox")
 
-        menu_locator = helper.get_locator_by_css(ElementsObject.menu)
-
-        home_checkbox_locator = helper.get_locator_by_xpath(
-            ElementsObject.home_checkbox
-        )
-        home_checkbox_locator.click()  # active checkbox
-        menu_locator.click()  # open manu
-
-        desktop_checkbox = helper.get_locator_by_css(ElementsObject.desktop_checkbox)
-        desktop_checkbox.click()  # uncheck desktop
-
+        helper.select_checkbox(ElementsObject.home_checkbox, True) # open manu
+        helper.select_checkbox(ElementsObject.arrow_button, True) # click on arrow
+        helper.select_checkbox(ElementsObject.desktop_checkbox, True) #uncheck desktop
         hidden_text_locator = helper.get_locator_by_xpath(ElementsObject.result_text)
-
-        browser.save_screenshot(f"test_2.png")
+        browser.save_screenshot("test_2.png")
         assert hidden_text_locator.is_displayed()
 
     def test_scroll(self, browser):
@@ -55,12 +41,12 @@ class TestElements:
         helper.driver.fullscreen_window()
 
         footer = helper.get_locator_by_xpath(ElementsObject.scroll_footer)
-        helper.driver.execute_script("arguments[0].remove();", footer)
+        helper.remove_element_from_DOM(footer)
 
         scroll_to_interactions = helper.get_locator_by_xpath(ElementsObject.scroll)
-        ActionChains(browser).scroll_to_element(scroll_to_interactions).perform()
+        helper.scroll_to_element(scroll_to_interactions)
 
-        browser.save_screenshot(f"test_3.png")
+        browser.save_screenshot("test_3.png")
         assert scroll_to_interactions.is_displayed()
 
     def test_select_value_from_dropdown(self, browser):
@@ -68,15 +54,12 @@ class TestElements:
         helper.driver.get("https://demoqa.com/select-menu")
         helper.driver.fullscreen_window()
 
-        select_one = helper.get_locator_by_xpath(ElementsObject.select_one)
-        select_one.click()
+        helper.select_value_from_dropdown(ElementsObject.select_one)
+        helper.select_value_from_dropdown(ElementsObject.dr_select)
 
-        dr_select = helper.get_locator_by_xpath(ElementsObject.dr_select)
-        dr_select.click()
+        select_one_text = helper.get_text(ElementsObject.select_one_text)
 
-        select_one_text = helper.get_locator_by_css(ElementsObject.select_one_text).text
-
-        browser.save_screenshot(f"test_4.png")
+        browser.save_screenshot("test_4.png")
         assert select_one_text == "Dr."
 
     def test_input_text(self, browser):
@@ -84,11 +67,10 @@ class TestElements:
         helper.driver.get("https://demoqa.com/text-box")
         helper.driver.fullscreen_window()
 
-        input_text = helper.get_locator_by_css(ElementsObject.input_full_name)
-        input_text.send_keys("Hello")
-        attr_type = input_text.get_attribute("value")
-        attr_class = input_text.get_attribute("class")
-        print(attr_class)
+        input_text = helper.enter_text_and_get_attribute_value(ElementsObject.input_full_name, "Hello")
 
-        browser.save_screenshot(f"test_5.png")
-        assert attr_type == "Hello"
+        helper.get_attribute_(ElementsObject.input_full_name, "value")
+        helper.get_attribute_(ElementsObject.input_full_name, "class")
+
+        browser.save_screenshot("test_5.png")
+        assert input_text == "Hello"
