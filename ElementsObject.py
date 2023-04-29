@@ -39,3 +39,11 @@ class ElementsObject:
     select_one_text = '//*[@id="selectOne"]/div[1]/div[1]'
 
     input_full_name = '//*[@id="userName"]'
+
+    start_demo_alert = '//p[2]/a'
+
+    click_here_new_window = '//*[@id="content"]/div/a'
+    new_window_h3 = '//h3'
+
+    new_iframe = '//*[@id="mce_0_ifr"]'
+    inframe_text_area = '//*[@id="tinymce"]/p'

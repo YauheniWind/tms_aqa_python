@@ -2,6 +2,7 @@ import time
 
 from selenium.webdriver.common.by import By
 
+from ElementsObject import ElementsObject
 from Helper import Helper
 
 
@@ -74,8 +75,8 @@ def test_alert(browser):
 
     current_w = browser.current_window_handle
 
-    a = browser.find_element(By.XPATH, '/html/body/div[1]/div[2]/div/main/div[2]/div[2]/div[2]/div[1]/p[2]/a')
-    a.click()
+    start_demo_alert = browser.find_element(By.XPATH, ElementsObject.start_demo_alert)
+    start_demo_alert.click()
     promtp = browser.switch_to.alert
     promtp.send_keys("ev")
     promtp.accept()
@@ -86,13 +87,13 @@ def test_alert(browser):
 def test_window(browser):
     browser.get('http://the-internet.herokuapp.com/windows')
     or_w = browser.current_window_handle
-    click_here = browser.find_element(By.XPATH, '//*[@id="content"]/div/a')
+    click_here = browser.find_element(By.XPATH, ElementsObject.click_here_new_window)
     click_here.click()
 
     new_w = [window for window in browser.window_handles if window != or_w][0]
     browser.switch_to.window(new_w)
 
-    nw = browser.find_element(By.XPATH, '/html/body/div/h3')
+    nw = browser.find_element(By.XPATH, ElementsObject.new_window_h3)
     assert nw.text == 'New Window'
 
     browser.close()
@@ -106,7 +107,7 @@ class TestBep:
         helper.driver.get('http://the-internet.herokuapp.com/iframe')
         helper.driver.fullscreen_window()
 
-        helper.switch_to_iframe('//*[@id="mce_0_ifr"]')
-        p_p = browser.find_element(By.XPATH, '//*[@id="tinymce"]/p')
+        helper.switch_to_iframe(ElementsObject.new_iframe)
+        p_p = browser.find_element(By.XPATH, ElementsObject.inframe_text_area)
 
         assert p_p.text == 'Your content goes here.'
