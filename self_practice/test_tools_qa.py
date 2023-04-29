@@ -51,8 +51,8 @@ def test_radio_button(browser):
     radio_button_text = radio_button_locator.text
     radio_button_locator.click()
 
-    span_text_xpath = '//*[@id="app"]/div/div/div[2]/div[2]/div[2]/p/span'
-    span_text_locator_text = browser.find_element(By.XPATH, span_text_xpath).text
+    span_text_css = ".mt-3 > .text-success"
+    span_text_locator_text = browser.find_element(By.CSS_SELECTOR, span_text_css).text
     assert radio_button_text == span_text_locator_text
 
 

@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions
 
 from Helper import Helper
 from ElementsObject import ElementsObject
+
+
 class TestsPage:
     def test_drag_and_drop(self, browser):
         helper = Helper(browser)
@@ -38,7 +40,9 @@ def test_log_in(browser, credentials):
 
     current_url = browser.current_url  # получем актуальный url
 
-    assert current_url == "https://www.saucedemo.com/inventory.html"  # Проверяем что  переход совершился
+    assert (
+        current_url == "https://www.saucedemo.com/inventory.html"
+    )  # Проверяем что  переход совершился
 
 
 # Добавление элемента в корзину
@@ -54,7 +58,9 @@ def test_add_in_basket(browser, credentials):
     password_loc.send_keys(credentials["password"])  # Пароль
     login_button.click()  # Нажимаем кнопку "Login"
 
-    name_of_product_loc = helper.get_locator_by_xpath(ElementsObject.name_of_product).text
+    name_of_product_loc = helper.get_locator_by_xpath(
+        ElementsObject.name_of_product
+    ).text
 
     add_to_card_loc = helper.get_locator_by_xpath(ElementsObject.add_to_cart_product)
     add_to_card_loc.click()
@@ -66,7 +72,9 @@ def test_add_in_basket(browser, credentials):
         ElementsObject.name_of_product_in_basket
     ).text
 
-    assert name_of_product_loc == name_of_product_in_basket_loc  # Проверяем что в корзине тот элемент
+    assert (
+        name_of_product_loc == name_of_product_in_basket_loc
+    )  # Проверяем что в корзине тот элемент
 
 
 # Отображение формы регистрации после нажатия submit
@@ -79,7 +87,9 @@ def test_registration_form(browser):
     email_loc = helper.get_locator_by_xpath(ElementsObject.email)
     current_address = helper.get_locator_by_xpath(ElementsObject.current_address)
     permanent_address = helper.get_locator_by_xpath(ElementsObject.permanent_address)
-    submit_button_loc = helper.get_locator_by_xpath(ElementsObject.submit_button_registration)
+    submit_button_loc = helper.get_locator_by_xpath(
+        ElementsObject.submit_button_registration
+    )
 
     full_name_loc.send_keys("Ev Gev")
     email_loc.send_keys("ev.gev@gmail.com")
@@ -90,8 +100,12 @@ def test_registration_form(browser):
     modal_win_loc = helper.get_locator_by_xpath(ElementsObject.modal_window_)
 
     if modal_win_loc.is_displayed():
-        name_in_modal_loc = helper.get_locator_by_xpath(ElementsObject.name_in_modal_window)
-        assert "Ev Gev" == name_in_modal_loc.text.split(":")[1]  # Проверяем правильность имени
+        name_in_modal_loc = helper.get_locator_by_xpath(
+            ElementsObject.name_in_modal_window
+        )
+        assert (
+            "Ev Gev" == name_in_modal_loc.text.split(":")[1]
+        )  # Проверяем правильность имени
 
 
 # Поиск книги
