@@ -28,9 +28,9 @@ class TestElements:
         helper = Helper(browser)
         helper.driver.get("https://demoqa.com/checkbox")
 
-        helper.select_checkbox(ElementsObject.home_checkbox, True) # open manu
-        helper.select_checkbox(ElementsObject.arrow_button, True) # click on arrow
-        helper.select_checkbox(ElementsObject.desktop_checkbox, True) #uncheck desktop
+        helper.select_checkbox(ElementsObject.home_checkbox, True)  # open manu
+        helper.select_checkbox(ElementsObject.arrow_button, True)  # click on arrow
+        helper.select_checkbox(ElementsObject.desktop_checkbox, True)  # uncheck desktop
         hidden_text_locator = helper.get_locator_by_xpath(ElementsObject.result_text)
         browser.save_screenshot("test_2.png")
         assert hidden_text_locator.is_displayed()
@@ -67,7 +67,9 @@ class TestElements:
         helper.driver.get("https://demoqa.com/text-box")
         helper.driver.fullscreen_window()
 
-        input_text = helper.enter_text_and_get_attribute_value(ElementsObject.input_full_name, "Hello")
+        input_text = helper.enter_text_and_get_attribute_value(
+            ElementsObject.input_full_name, "Hello"
+        )
 
         helper.get_attribute_(ElementsObject.input_full_name, "value")
         helper.get_attribute_(ElementsObject.input_full_name, "class")

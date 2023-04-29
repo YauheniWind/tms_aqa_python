@@ -48,7 +48,9 @@ def test_cookes(browser):
 def test_js(browser):
     browser.get("https://www.istores.sk")
 
-    browser.execute_script("document.getElementById('cookieUseAgreement').style.display = 'none'")
+    browser.execute_script(
+        "document.getElementById('cookieUseAgreement').style.display = 'none'"
+    )
 
     # footer_xpath = (By.XPATH, '//*[@id="footercont"]/footer/div[6]')
     # footer_locator = driver.find_element(*footer_xpath)
@@ -64,14 +66,15 @@ def test_checks_elements(browser):
         "https://teachmeskills.by/kursy-programmirovaniya/qa-avtomatizirovannoe-testirovanie-na-python-online"
     )
 
-    selector = browser.find_element(By.CLASS_NAME, 't517__innercol')
-    selectors = browser.find_elements(By.CLASS_NAME, 't517__innercol')
+    selector = browser.find_element(By.CLASS_NAME, "t517__innercol")
+    selectors = browser.find_elements(By.CLASS_NAME, "t517__innercol")
     print(selectors)
     browser.execute_script("arguments[0].scrollIntoView();", selector)
     assert selector.is_displayed()
 
+
 def test_alert(browser):
-    browser.get('https://learn.javascript.ru/task/simple-page')
+    browser.get("https://learn.javascript.ru/task/simple-page")
 
     current_w = browser.current_window_handle
 
@@ -80,12 +83,13 @@ def test_alert(browser):
     promtp = browser.switch_to.alert
     promtp.send_keys("ev")
     promtp.accept()
-    assert promtp.text == 'ev'
+    assert promtp.text == "ev"
 
     browser.switch_to.window(current_w)
 
+
 def test_window(browser):
-    browser.get('http://the-internet.herokuapp.com/windows')
+    browser.get("http://the-internet.herokuapp.com/windows")
     or_w = browser.current_window_handle
     click_here = browser.find_element(By.XPATH, ElementsObject.click_here_new_window)
     click_here.click()
@@ -94,20 +98,20 @@ def test_window(browser):
     browser.switch_to.window(new_w)
 
     nw = browser.find_element(By.XPATH, ElementsObject.new_window_h3)
-    assert nw.text == 'New Window'
+    assert nw.text == "New Window"
 
     browser.close()
     browser.switch_to.window(or_w)
-    assert click_here.text == 'Click Here'
+    assert click_here.text == "Click Here"
 
 
 class TestBep:
     def test_iframe_(self, browser):
         helper = Helper(browser)
-        helper.driver.get('http://the-internet.herokuapp.com/iframe')
+        helper.driver.get("http://the-internet.herokuapp.com/iframe")
         helper.driver.fullscreen_window()
 
         helper.switch_to_iframe(ElementsObject.new_iframe)
         p_p = browser.find_element(By.XPATH, ElementsObject.inframe_text_area)
 
-        assert p_p.text == 'Your content goes here.'
+        assert p_p.text == "Your content goes here."
