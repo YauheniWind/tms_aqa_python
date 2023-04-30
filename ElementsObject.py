@@ -47,3 +47,16 @@ class ElementsObject:
 
     new_iframe = '//*[@id="mce_0_ifr"]'
     inframe_text_area = '//*[@id="tinymce"]/p'
+
+    dm_checkbox = '//*[@type="checkbox"]'
+    dm_remove_button = '//*[@id="checkbox-example"]/button'
+    dm_message = '//*[@id="message"]'
+
+    dm_input = '//*[@type="text"]'
+    dm_enable_button = '//*[@id="input-example"]/button'
+
+    download_link = '//*[@id="content"]//a[1]'
+
+    input_file = '//*[@id="file-upload"]'
+    file_upload = '//*[@id="file-submit"]'
+    uploaded_file = '//*[@id="uploaded-files"]'
