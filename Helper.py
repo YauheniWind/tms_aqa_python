@@ -85,3 +85,22 @@ class Helper:
             return element.get_attribute("class")
         else:
             return element.get_attribute("value")
+
+    def waiting_element(self, locator):
+        return WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, locator))
+            )
+
+    def waiting_disappearance_element(self, locator):
+        return WebDriverWait(self.driver, 10).until_not(
+            EC.presence_of_element_located((By.XPATH, locator))
+        )
+
+    def element_is_enabled(self, locator):
+        element = self.get_locator_by_xpath(locator)
+        if element.is_enabled():
+            return True
+        return False
+
+    def ec_text_to_be_present_in_element(self, element, text):
+        return EC.text_to_be_present_in_element(element, text)
