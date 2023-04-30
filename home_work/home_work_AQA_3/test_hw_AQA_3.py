@@ -1,8 +1,11 @@
+import os
 import requests
 import filecmp
 
 from Helper import Helper
 from ElementsObject import ElementsObject
+
+current_dir = os.getcwd()  # получаем текущий рабочий каталог
 
 
 class TestDynamicControls:
@@ -43,17 +46,19 @@ class TestDownloadUpload:
     def test_download(self, browser):
         helper = Helper(browser)
         helper.driver.get("http://the-internet.herokuapp.com/download")
+        file_path = os.path.join(
+            current_dir, "file_pdf.pdf"
+        )  # добавляем имя файла к текущему пути
 
         download_link = helper.get_locator_by_xpath(ElementsObject.download_link)
         download_url = download_link.get_attribute("href")
 
         response = requests.get(download_url)
-
-        downloaded_file = "/Users/evgenijgravdin/Desktop/tms_aqa_python/home_work/home_work_AQA_3/file_pdf.pdf"
+        downloaded_file = os.path.relpath(file_path)  # выводим относительный путь
         with open(downloaded_file, "wb") as file:
             file.write(response.content)
 
-        main_file_path = "/Users/evgenijgravdin/Desktop/tms_aqa_python/home_work/home_work_AQA_3/file_pdf.pdf"
+        main_file_path = os.path.relpath(file_path)  # выводим относительный путь
         file_eq = filecmp.cmp(downloaded_file, main_file_path)
 
         if file_eq:
@@ -64,9 +69,12 @@ class TestDownloadUpload:
     def test_upload(self, browser):
         helper = Helper(browser)
         helper.driver.get("http://the-internet.herokuapp.com/upload")
+        file_path = os.path.join(
+            current_dir, "sys_photo.jpeg"
+        )  # добавляем имя файла к текущему пути
 
         input_file = helper.get_locator_by_xpath(ElementsObject.input_file)
-        photo_path = "/Users/evgenijgravdin/Desktop/tms_aqa_python/home_work/home_work_AQA_3/sys_photo.jpeg"
+        photo_path = os.path.abspath(file_path)  # выводим полный путь
 
         input_file.send_keys(photo_path)
 
