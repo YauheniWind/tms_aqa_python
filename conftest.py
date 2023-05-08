@@ -55,3 +55,7 @@ def credentials():
 def pytest_addoption(parser):
     parser.addoption("--address", action="store", default="http://192.168.122.244/", help="HuntBox web address")
     parser.addoption("--browser", action="store", default="firefox", help="Browser name")
+
+@pytest.fixture
+def open_page(browser):
+    browser.get("http://the-internet.herokuapp.com/dynamic_controls")
