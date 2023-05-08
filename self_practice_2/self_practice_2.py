@@ -2,7 +2,7 @@ from Helper import Helper
 from self_practice_2.PageObject import PageObject
 
 
-class TestPracticeLesson(Helper):
+class  TestPracticeLesson(Helper):
     def __init__(self, driver):
         super().__init__(driver)
 
