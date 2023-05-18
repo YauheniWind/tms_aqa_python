@@ -10,3 +10,4 @@ selenium
 pytest-xdist
 pytest-rerunfailures
 allure-pytest
+mysql-connector-python

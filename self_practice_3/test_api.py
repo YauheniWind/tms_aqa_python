@@ -1,5 +1,8 @@
+import os
+
 import requests
 import json
+from github import Github
 
 def test_api_posts():
     url = "https://jsonplaceholder.typicode.com/posts"
@@ -45,3 +48,36 @@ def test_api_random_cat():
     assert my_cat_id in all_cats_ids
 
     # assert response_all_cats["id"] == response_my_cat["id"]
+
+def test_bitbucket_api():
+    access_token = os.environ.get('GITHUB_TOKEN')
+    print(os.environ.get('echo $GITHUB_TOKEN'))
+
+    g = Github(access_token)
+
+    # Get the authenticated user
+    user = g.get_user()
+    print("Username:", user.login)
+    print("Name:", user.name)
+    print("Email:", user.email)
+    print("Bio:", user.bio)
+    print("--------------------------")
+
+    # Iterate over the repositories of the user
+    for repo in user.get_repos():
+        print("Repository name:", repo.name)
+        print("Default branch:", repo.default_branch)
+        print("UUID:", repo.id)
+        print("-------------------------")
+
+
+    for repo in user.get_repos():
+
+        pull_requests = repo.get_pulls(state='all')
+
+        for pr in pull_requests:
+            print("Pull request title:", pr.title)
+            print("Status:", pr.state)
+            print("Branch:", pr.base.ref)
+            print("Number of comments:", pr.comments)
+            print("-------------------------")
